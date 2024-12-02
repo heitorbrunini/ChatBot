@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chat de Ajuda</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="chat-container">
+    <div class="chat-header">
+      <h2>Ajuda Online</h2>
+    </div>
+    <div class="chat-body" id="chatBody">
+      <div class="message bot-message">
+        Olá! Como posso ajudá-lo hoje?
+      </div>
+    </div>
+    <div class="chat-footer">
+      <input type="text" id="userMessage" placeholder="Digite sua mensagem..." />
+      <button id="sendButton">Enviar</button>
+    </div>
+  </div>
+
+  <script>
+    const sendButton = document.getElementById('sendButton');
+    const chatBody = document.getElementById('chatBody');
+    const userMessage = document.getElementById('userMessage');
+
+    sendButton.addEventListener('click', () => {
+      const messageText = userMessage.value.trim();
+      if (messageText) {
+        const userMessageDiv = document.createElement('div');
+        userMessageDiv.className = 'message user-message';
+        userMessageDiv.textContent = messageText;
+        chatBody.appendChild(userMessageDiv);
+
+        userMessage.value = '';
+        chatBody.scrollTop = chatBody.scrollHeight;
+
+        setTimeout(() => {
+          const botResponse = document.createElement('div');
+          botResponse.className = 'message bot-message';
+          botResponse.textContent = 'Resposta automática do bot.';
+          chatBody.appendChild(botResponse);
+          chatBody.scrollTop = chatBody.scrollHeight;
+        }, 1000);
+      }
+    });
+  </script>
+</body>
+</html>
